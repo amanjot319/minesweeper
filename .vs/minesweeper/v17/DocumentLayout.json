@@ -1,0 +1,49 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Amanjot\\source\\repos\\minesweeper\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C0E1863F-B820-49FC-A4AE-7EA11E7DD931}|minesweeper\\minesweeper.csproj|c:\\users\\amanjot\\source\\repos\\minesweeper\\minesweeper\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C0E1863F-B820-49FC-A4AE-7EA11E7DD931}|minesweeper\\minesweeper.csproj|solutionrelative:minesweeper\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Amanjot\\source\\repos\\minesweeper\\minesweeper\\Program.cs",
+              "RelativeDocumentMoniker": "minesweeper\\Program.cs",
+              "ToolTip": "C:\\Users\\Amanjot\\source\\repos\\minesweeper\\minesweeper\\Program.cs",
+              "RelativeToolTip": "minesweeper\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-19T21:12:05.124Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
