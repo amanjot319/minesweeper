@@ -1,0 +1,16 @@
+C:\Users\Amanjot\source\repos\minesweeper\minesweeper\bin\Debug\net8.0-windows\minesweeper.exe
+C:\Users\Amanjot\source\repos\minesweeper\minesweeper\bin\Debug\net8.0-windows\minesweeper.deps.json
+C:\Users\Amanjot\source\repos\minesweeper\minesweeper\bin\Debug\net8.0-windows\minesweeper.runtimeconfig.json
+C:\Users\Amanjot\source\repos\minesweeper\minesweeper\bin\Debug\net8.0-windows\minesweeper.dll
+C:\Users\Amanjot\source\repos\minesweeper\minesweeper\bin\Debug\net8.0-windows\minesweeper.pdb
+C:\Users\Amanjot\source\repos\minesweeper\minesweeper\obj\Debug\net8.0-windows\minesweeper.Form1.resources
+C:\Users\Amanjot\source\repos\minesweeper\minesweeper\obj\Debug\net8.0-windows\minesweeper.csproj.GenerateResource.cache
+C:\Users\Amanjot\source\repos\minesweeper\minesweeper\obj\Debug\net8.0-windows\minesweeper.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Amanjot\source\repos\minesweeper\minesweeper\obj\Debug\net8.0-windows\minesweeper.AssemblyInfoInputs.cache
+C:\Users\Amanjot\source\repos\minesweeper\minesweeper\obj\Debug\net8.0-windows\minesweeper.AssemblyInfo.cs
+C:\Users\Amanjot\source\repos\minesweeper\minesweeper\obj\Debug\net8.0-windows\minesweeper.csproj.CoreCompileInputs.cache
+C:\Users\Amanjot\source\repos\minesweeper\minesweeper\obj\Debug\net8.0-windows\minesweeper.dll
+C:\Users\Amanjot\source\repos\minesweeper\minesweeper\obj\Debug\net8.0-windows\refint\minesweeper.dll
+C:\Users\Amanjot\source\repos\minesweeper\minesweeper\obj\Debug\net8.0-windows\minesweeper.pdb
+C:\Users\Amanjot\source\repos\minesweeper\minesweeper\obj\Debug\net8.0-windows\minesweeper.genruntimeconfig.cache
+C:\Users\Amanjot\source\repos\minesweeper\minesweeper\obj\Debug\net8.0-windows\ref\minesweeper.dll
