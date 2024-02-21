@@ -14,3 +14,4 @@ C:\Users\Amanjot\source\repos\minesweeper\minesweeper\obj\Debug\net8.0-windows\r
 C:\Users\Amanjot\source\repos\minesweeper\minesweeper\obj\Debug\net8.0-windows\minesweeper.pdb
 C:\Users\Amanjot\source\repos\minesweeper\minesweeper\obj\Debug\net8.0-windows\minesweeper.genruntimeconfig.cache
 C:\Users\Amanjot\source\repos\minesweeper\minesweeper\obj\Debug\net8.0-windows\ref\minesweeper.dll
+C:\Users\Amanjot\source\repos\minesweeper\minesweeper\obj\Debug\net8.0-windows\minesweeper.sourcelink.json

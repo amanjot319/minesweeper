@@ -28,30 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
             SuspendLayout();
-            // 
-            // panel1
-            // 
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(800, 450);
-            panel1.TabIndex = 0;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(panel1);
             Name = "Form1";
-            Text = "Form1";
+            Text = "minesweeper";
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Panel panel1;
     }
 }
