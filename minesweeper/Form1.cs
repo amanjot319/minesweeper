@@ -7,41 +7,42 @@ namespace minesweeper
             public Button button;          // Button displays cell onto form
             public short x, y, w, h;       // x, y are position of cell, w, h are width and height for button
             public bool isRevealed, hasFlag, hasBomb;
-            public byte numAdjecentBombs;  // Number of bombs in vicinity
+            public byte numAdjacentBombs = 0;  // Number of bombs in vicinity
         }
 
         public class board
         {
             public cell[,] cells;
-            public byte numBombs = 0;
+            public int numBombs = 0;
+            public int cols = 0;
+            public int rows = 0;
         }
         
-        int difficulty = 0; // 0 is Beginner, 1 is med, 2 is hard, change how difficulty is set later via a button or drop down menu
+        byte difficulty = 0; // 0 is Beginner, 1 is med, 2 is hard, change how difficulty is set later via a button or drop down menu
 
         private void InitializeBoard(board board)
         {
-            int x, y;
             if (difficulty == 0)
             {
-                x = 8;   // Beginner is 8x8
-                y = 8;
+                board.rows = 8;   // Beginner is 8x8
+                board.cols = 8;
             }
             else if (difficulty == 1)
             {
-                x = 16;  // Intermediate is 16x16
-                y = 16;
+                board.rows = 16;  // Intermediate is 16x16
+                board.cols = 16;
             }
             else
             {
-                x = 30;  // Expert is 30x16
-                y = 16;
+                board.rows = 30;  // Expert is 30x16
+                board.cols = 16;
             }
 
-            board.cells = new cell[x, y];  // Create 2d array of cells
+            board.cells = new cell[board.rows, board.cols];  // Create 2d array of cells
 
-            for (short i = 0; i < x; i++)
+            for (short i = 0; i < board.rows; i++)
             {
-                for (short j = 0; j < y; j++)
+                for (short j = 0; j < board.cols; j++)
                 {
                     board.cells[i, j] = new cell() // Create a cell for every cell in 
                     {
@@ -57,9 +58,11 @@ namespace minesweeper
                         Height = board.cells[i, j].h,
                         Location = new System.Drawing.Point(i * board.cells[i, j].w, j * board.cells[i, j].h)
                     };
+                    int adjBombs = board.cells[i, j].numAdjacentBombs;
+
                     // add the cell to the button's tag to later use for click behavior
                     board.cells[i, j].button.Tag = board.cells[i, j];
-                    board.cells[i,j].button.Click += new System.EventHandler(btn_click);
+                    board.cells[i, j].button.Click += (sender, e) => btn_click(sender, e);
 
                     this.Controls.Add(board.cells[i, j].button);
                 }
@@ -83,7 +86,7 @@ namespace minesweeper
                 max = 99;   // Expert has 99 bombs and is 30x16
             }
 
-            for (int i = 0; i < max; i++)
+            while (board.numBombs < max)
             {
                 Random rnd = new Random();
                 int xRnd = 0;
@@ -91,18 +94,18 @@ namespace minesweeper
 
                 if (difficulty == 0)
                 {
-                    xRnd = rnd.Next(0, 7);
-                    yRnd = rnd.Next(0, 7);
+                    xRnd = rnd.Next(0, 8);
+                    yRnd = rnd.Next(0, 8);
                 }
                 else if (difficulty == 1)
                 {
-                    xRnd = rnd.Next(0, 15);
-                    yRnd = rnd.Next(0, 15);
+                    xRnd = rnd.Next(0, 16);
+                    yRnd = rnd.Next(0, 16);
                 }
-                else if (difficulty == 2)
+                else
                 {
-                    xRnd = rnd.Next(0, 29);
-                    yRnd = rnd.Next(0, 15);
+                    xRnd = rnd.Next(0, 30);
+                    yRnd = rnd.Next(0, 16);
                 }
 
                 if (board.cells[xRnd, yRnd].hasBomb == false)
@@ -112,19 +115,36 @@ namespace minesweeper
                     board.cells[xRnd, yRnd].button.Text = "F";
                     board.numBombs++;
                 }
-                else
-                {
-                    max++; // If cell did have bomb, increase the max amount of iterations by 1 and repeat for loop
-                    continue;
-                }
             }
 
         }
 
-        private void GenerateNeighborNumbers()
+        private void CountAdjacentBombs(board board)
         {
-
+            for (int x = 0; x < board.rows; x++)        // First two for loops iterate through the 2d matrix of cells
+            {
+                for (int y = 0; y < board.cols; y++)
+                {
+                    for (int i = -1; i <= 1; i++)       // Second two for loops determine how many cells in vicinity have bombs
+                    {
+                        for (int j = -1; j <= 1; j++)
+                        {
+                            int checkX = i + x;
+                            int checkY = j + y;
+                            if (checkX > -1 && checkX < board.rows && checkY > -1 && checkY < board.cols)
+                            {
+                                if (board.cells[checkX, checkY].hasBomb == true)
+                                {
+                                    board.cells[x, y].numAdjacentBombs++;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
+
+
         // decides functionality when button is clicked
         private void btn_click(object sender, EventArgs e)
         {
@@ -136,7 +156,7 @@ namespace minesweeper
             }
             else
             {
-                btn.Text = "O";
+                btn.Text = data.numAdjacentBombs.ToString();
             }
             
         }
@@ -146,6 +166,7 @@ namespace minesweeper
             board board = new board();
             InitializeBoard(board);
             GenerateBombs(board);
+            CountAdjacentBombs(board);
         }
 
     }
