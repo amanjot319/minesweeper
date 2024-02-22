@@ -16,7 +16,7 @@ namespace minesweeper
             public byte numBombs = 0;
         }
         
-        int difficulty = 1; // 0 is Beginner, 1 is med, 2 is hard, change how difficulty is set later via a button or drop down menu
+        int difficulty = 0; // 0 is Beginner, 1 is med, 2 is hard, change how difficulty is set later via a button or drop down menu
 
         private void InitializeBoard(board board)
         {
@@ -57,6 +57,10 @@ namespace minesweeper
                         Height = board.cells[i, j].h,
                         Location = new System.Drawing.Point(i * board.cells[i, j].w, j * board.cells[i, j].h)
                     };
+                    // add the cell to the button's tag to later use for click behavior
+                    board.cells[i, j].button.Tag = board.cells[i, j];
+                    board.cells[i,j].button.Click += new System.EventHandler(btn_click);
+
                     this.Controls.Add(board.cells[i, j].button);
                 }
             }
@@ -105,6 +109,7 @@ namespace minesweeper
                 {
                     // If cell does not currently contain bomb, add bomb
                     board.cells[xRnd, yRnd].hasBomb = true;
+                    board.cells[xRnd, yRnd].button.Text = "F";
                     board.numBombs++;
                 }
                 else
@@ -120,7 +125,21 @@ namespace minesweeper
         {
 
         }
-
+        // decides functionality when button is clicked
+        private void btn_click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            cell data = (cell)btn.Tag;
+            if(data.hasBomb == true)
+            {
+                btn.Text = "X";
+            }
+            else
+            {
+                btn.Text = "O";
+            }
+            
+        }
         public Form1()
         {
             InitializeComponent();
