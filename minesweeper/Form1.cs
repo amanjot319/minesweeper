@@ -18,7 +18,7 @@ namespace minesweeper
             public int rows = 0;
         }
         
-        byte difficulty = 0; // 0 is Beginner, 1 is med, 2 is hard, change how difficulty is set later via a button or drop down menu
+        byte difficulty = 2; // 0 is Beginner, 1 is med, 2 is hard, change how difficulty is set later via a button or drop down menu
 
         private void InitializeBoard(board board)
         {
@@ -129,13 +129,14 @@ namespace minesweeper
                     {
                         for (int j = -1; j <= 1; j++)
                         {
-                            int checkX = i + x;
+                            int checkX = i + x; // Creates x and y index values to check for bombs
                             int checkY = j + y;
+
                             if (checkX > -1 && checkX < board.rows && checkY > -1 && checkY < board.cols)
-                            {
+                            {   // Checks if index values for cells are within bounds
                                 if (board.cells[checkX, checkY].hasBomb == true)
                                 {
-                                    board.cells[x, y].numAdjacentBombs++;
+                                    board.cells[x, y].numAdjacentBombs++;   // Adds to numAdjecentBombs if there is a bomb
                                 }
                             }
                         }
@@ -148,6 +149,7 @@ namespace minesweeper
         // decides functionality when button is clicked
         private void btn_click(object sender, EventArgs e)
         {
+            
             Button btn = (Button)sender;
             cell data = (cell)btn.Tag;
             if(data.hasBomb == true)
@@ -160,6 +162,9 @@ namespace minesweeper
             }
             
         }
+
+
+
         public Form1()
         {
             InitializeComponent();
