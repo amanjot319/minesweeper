@@ -7,7 +7,7 @@ namespace minesweeper
             public Button button;          // Button displays cell onto form
             public short x, y, w, h;       // x, y are position of cell, w, h are width and height for button
             public bool isRevealed, hasFlag, hasBomb;
-            public byte numAdjacentBombs = 0;  // Number of bombs in vicinity
+            public int numAdjacentBombs = 0;  // Number of bombs in vicinity
         }
 
         public class board
@@ -48,8 +48,8 @@ namespace minesweeper
                     {
                         x = i,
                         y = j,
-                        w = 20,
-                        h = 20
+                        w = 30,
+                        h = 30
                     };
 
                     board.cells[i, j].button = new Button()
@@ -62,7 +62,7 @@ namespace minesweeper
 
                     // add the cell to the button's tag to later use for click behavior
                     board.cells[i, j].button.Tag = board.cells[i, j];
-                    board.cells[i, j].button.Click += (sender, e) => btn_click(sender, e);
+                    board.cells[i, j].button.Click += (sender, e) => btn_click(sender, e, board);
 
                     this.Controls.Add(board.cells[i, j].button);
                 }
@@ -113,32 +113,29 @@ namespace minesweeper
                     // If cell does not currently contain bomb, add bomb
                     board.cells[xRnd, yRnd].hasBomb = true;
                     board.cells[xRnd, yRnd].button.Text = "F";
+                    board.cells[xRnd, yRnd].numAdjacentBombs = -1;
                     board.numBombs++;
+
+                    CountAdjacentBombs(board, xRnd, yRnd);
                 }
             }
 
         }
 
-        private void CountAdjacentBombs(board board)
+        private void CountAdjacentBombs(board board, int xRnd, int yRnd)
         {
-            for (int x = 0; x < board.rows; x++)        // First two for loops iterate through the 2d matrix of cells
+            for (int i = -1; i <= 1; i++)       // Second two for loops determine how many cells in vicinity have bombs
             {
-                for (int y = 0; y < board.cols; y++)
+                for (int j = -1; j <= 1; j++)
                 {
-                    for (int i = -1; i <= 1; i++)       // Second two for loops determine how many cells in vicinity have bombs
-                    {
-                        for (int j = -1; j <= 1; j++)
-                        {
-                            int checkX = i + x; // Creates x and y index values to check for bombs
-                            int checkY = j + y;
+                    int checkX = i + xRnd; // Creates x and y index values to check for bombs
+                    int checkY = j + yRnd;
 
-                            if (checkX > -1 && checkX < board.rows && checkY > -1 && checkY < board.cols)
-                            {   // Checks if index values for cells are within bounds
-                                if (board.cells[checkX, checkY].hasBomb == true)
-                                {
-                                    board.cells[x, y].numAdjacentBombs++;   // Adds to numAdjecentBombs if there is a bomb
-                                }
-                            }
+                    if (checkX > -1 && checkX < board.rows && checkY > -1 && checkY < board.cols)
+                    { 
+                        if (board.cells[checkX, checkY].hasBomb == false)
+                        {
+                            board.cells[checkX, checkY].numAdjacentBombs++;   // Adds to numAdjecentBombs if there is a bomb
                         }
                     }
                 }
@@ -147,20 +144,49 @@ namespace minesweeper
 
 
         // decides functionality when button is clicked
-        private void btn_click(object sender, EventArgs e)
-        {
-            
+        private void btn_click(object sender, EventArgs e, board board)
+        {   
             Button btn = (Button)sender;
             cell data = (cell)btn.Tag;
+            data.isRevealed = true;
+
             if(data.hasBomb == true)
             {
                 btn.Text = "X";
             }
-            else
+            else if (data.numAdjacentBombs > 0)
             {
                 btn.Text = data.numAdjacentBombs.ToString();
             }
-            
+            else if (data.numAdjacentBombs == 0)
+            {
+                data.button.Text = "R";
+
+                for (int i = -1; i <= 1; i++)
+                {
+                    for (int j = -1; j <= 1; j++)
+                    {
+                        int checkX = i + (int)data.x; 
+                        int checkY = j + (int)data.y;
+
+                        if (checkX > -1 && checkX < board.rows && checkY > -1 && checkY < board.cols && board.cells[checkX, checkY].isRevealed == false)
+                        {   // Checks if index values for cells are within bounds
+                            if (board.cells[checkX, checkY].numAdjacentBombs > 0)
+                            {
+                                board.cells[checkX, checkY].button.Text = board.cells[checkX, checkY].numAdjacentBombs.ToString();
+                            }
+                            else if (board.cells[checkX, checkY].numAdjacentBombs == 0)
+                            {
+                                board.cells[checkX, checkY].button.PerformClick();
+                            }
+                            else if (board.cells[checkX, checkY].numAdjacentBombs == -1)
+                            {
+                                
+                            }
+                        }
+                    }
+                }
+            }
         }
 
 
@@ -171,7 +197,6 @@ namespace minesweeper
             board board = new board();
             InitializeBoard(board);
             GenerateBombs(board);
-            CountAdjacentBombs(board);
         }
 
     }
