@@ -65,6 +65,10 @@ namespace minesweeper
                     board.cells[i, j].button.Click += (sender, e) => btn_click(sender, e, board);
 
                     this.Controls.Add(board.cells[i, j].button);
+
+                    // Add MouseDown event handler for right-click
+
+                    board.cells[i, j].button.MouseDown += (sender, e) => btn_right_click(sender, e, board);
                 }
             }
         }
@@ -179,19 +183,44 @@ namespace minesweeper
                             {
                                 board.cells[checkX, checkY].button.PerformClick();
                             }
-                            else if (board.cells[checkX, checkY].numAdjacentBombs == -1)
-                            {
-                                
-                            }
                         }
                     }
                 }
             }
         }
 
+        private void btn_right_click(object sender, MouseEventArgs e, board board)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                Button clickedButton = (Button)sender;
+                cell clickedCell = (cell)clickedButton.Tag;
+
+                if (clickedCell.isRevealed == false)
+                {
+                    clickedCell.hasFlag = !clickedCell.hasFlag; // Toggle flag
+
+                    if (clickedCell.hasFlag)
+                    {
+                        clickedButton.Text = "!"; // Set flag
+                        if (board.numBombs > 0)   // Decrease bomb count whenever flag is set
+                        {
+                            board.numBombs--;
+                        }
+                    }
+                    else
+                    {
+                        clickedButton.Text = ""; // Remove flag
+                        board.numBombs++;
+                    }
+
+                }
+            }
+        }
 
 
-        public Form1()
+
+            public Form1()
         {
             InitializeComponent();
             board board = new board();
